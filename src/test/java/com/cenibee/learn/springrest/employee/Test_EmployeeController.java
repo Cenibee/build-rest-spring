@@ -35,7 +35,7 @@ public class Test_EmployeeController {
 
         // then: employee 와 employee 의 id 로 검색한 결과가 동일하다. (Read)
         assertThat(employees.count()).isEqualTo(preloadedSize + 1);
-        assertThat(controller.one(id)).isEqualTo(employee);
+        assertThat(controller.one(id).getContent()).isEqualTo(employee);
 
         // when: role 을 변경하고 저장하면 (Update)
         employee.setRole("supporter");
@@ -43,8 +43,8 @@ public class Test_EmployeeController {
 
         // then: employee 의 id 로 검색한 결과의 role 이 변경된 값과 같다.
         assertThat(employees.count()).isEqualTo(preloadedSize + 1);
-        assertThat(controller.one(id)).isEqualTo(employee);
-        assertThat(controller.one(id).getRole()).isEqualTo("supporter");
+        assertThat(controller.one(id).getContent()).isEqualTo(employee);
+        assertThat(controller.one(id).getContent().getRole()).isEqualTo("supporter");
 
         // when: employee 를 삭제하면 (Delete)
         employees.deleteById(id);
