@@ -23,7 +23,10 @@ public class Test_EmployeeController {
     void CRUD_test() {
         // given: 테스트 시작 전 사이즈와 저장되지 않은 Employee employee 가 주어졌을 떄
         Long preloadedSize = employees.count();
-        Employee employee = new Employee("Bab", "mid lane");
+        Employee employee = Employee.builder()
+                .name("Bab")
+                .role("mid lane")
+                .build();
         assertThat(employees.exists(Example.of(employee))).isFalse();
 
         // when: employee 를 저장하면 (Create)
