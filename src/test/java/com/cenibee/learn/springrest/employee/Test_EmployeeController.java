@@ -30,7 +30,7 @@ public class Test_EmployeeController {
         assertThat(employees.exists(Example.of(employee))).isFalse();
 
         // when: employee 를 저장하면 (Create)
-        employee = controller.newEmployee(employee);
+        employee = controller.newEmployee(employee).getContent();
         final long id = employee.getId();
 
         // then: employee 와 employee 의 id 로 검색한 결과가 동일하다. (Read)
@@ -39,7 +39,7 @@ public class Test_EmployeeController {
 
         // when: role 을 변경하고 저장하면 (Update)
         employee.setRole("supporter");
-        employee = controller.replaceEmployee(employee, id);
+        employee = controller.replaceEmployee(employee, id).getContent();
 
         // then: employee 의 id 로 검색한 결과의 role 이 변경된 값과 같다.
         assertThat(employees.count()).isEqualTo(preloadedSize + 1);
